@@ -103,6 +103,7 @@ void test03() {
   // TEST : Inserting elements;
   cout << endl << "TEST : Inserting elements at 5 and 7" << endl;
   A.insert('w',5);
+  cout << A << endl;
   p = A.getAtPtr(7);
   A.insert('w', p);
   cout << A << endl;
@@ -130,7 +131,6 @@ void test03() {
 
   cout << "Test 03 - Done!" << endl;
 } // Destructor Called Here!!
-
 
 
 //---------------------------------------------------------------------

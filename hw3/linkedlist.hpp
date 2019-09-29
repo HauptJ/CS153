@@ -8,16 +8,24 @@ template <typename T>
 LinkedList<T>&  LinkedList<T>::operator= (const LinkedList<T>& rhs) {
 
   if (this != &rhs) {
-    const LinkedList<T>* ptr = &rhs;
-    LinkedList<T>* p = this;
-    int size = rhs.size();
-    clear();
 
-    for (int i = 0; i < size; i++) {
-      p->m_data = ptr->m_data;
-      ptr = ptr->m_next;
-      p->m_next = new LinkedList<T>;
-      p = p->m_next;
+    const LinkedList<T>* tmpRHS = &rhs;
+
+    //Creates the second item in the list (or the sentinel)
+    LinkedList<T>* tmpLHS = this;
+    // Clear list as it is not needed anymore
+    this->clear();
+
+    //Recreate LHS to be the same as RHS
+    for (int i = 0; i < rhs.size(); i++) {
+      // set the data of the first element
+      tmpLHS->m_data = tmpRHS->m_data;
+      // advance RHS
+      tmpRHS = tmpRHS->m_next;
+      // add an element to LHS
+      tmpLHS->m_next = new LinkedList<T>;
+      // advance LHS
+      tmpLHS = tmpLHS->m_next;
     }
   }
   return *this;
@@ -47,7 +55,7 @@ int LinkedList<T>::size() const {
   if (m_next == NULL){
     return 0;
   }
-
+  // recursively increment pointer while not at sentinel
   return m_next->size() + 1;
 }
 
@@ -69,11 +77,11 @@ bool LinkedList<T>::isEmpty() const {
 //     returns NULL if the list is empty
 template <typename T>
 LinkedList<T>* LinkedList<T>::getFirstPtr() {
-  if (m_next != NULL) {
-    return this;
+  if (m_next == NULL) {
+    std::cout << "ERROR : PANIC in LINKEDLIST!! getFirstPtr()" << "list is empty" << std::endl;
+    return NULL;
   } else {
-      std::cout << "ERROR : PANIC in LINKEDLIST!! getFirstPtr()" << "list is empty" << std::endl;
-      return NULL;
+    return this;
   }
 }
 
@@ -88,8 +96,8 @@ LinkedList<T>* LinkedList<T>::getLastPtr() {
   }
   else if (m_next == NULL) {
     std::cout << "ERROR : Panic in LinkedList.getLastPtr()! Empty List!"<< std::endl;
+    return NULL;
   }
-
   return m_next -> getLastPtr();
 }
 
@@ -99,9 +107,9 @@ LinkedList<T>* LinkedList<T>::getLastPtr() {
 //     returns NULL if no such element exists.
 template <typename T>
 LinkedList<T>* LinkedList<T>::getAtPtr(int i) {
-  int size = this->size();
-  if (i >= size || i < 0) {
+  if (i >= this->size() || i < 0) {
     std::cout << "ERROR : Panic in LinkedList.getAtPtr(). " << i << " is an invalid index!" << std::endl;
+    return NULL;
   }
 
   LinkedList<T>* p = this;
@@ -109,7 +117,6 @@ LinkedList<T>* LinkedList<T>::getAtPtr(int i) {
   for (int j = 0; j < i; j++) {
     p = p->m_next;
   }
-
   return p;
 }
 
@@ -136,7 +143,10 @@ T* LinkedList<T>::first() {
 //     returns NULL if no such element exists.
 template <typename T>
 T* LinkedList<T>::last() {
-  if (m_next != NULL) {
+  if (m_next == NULL) {
+    std::cout << "ERROR : PANIC in LINKEDLIST!! last()" << "list is empty" << std::endl;
+    return NULL;
+  } else {
     LinkedList* tmp = this;
 
     // we want the node before the sentinal so m_next 2x
@@ -144,10 +154,6 @@ T* LinkedList<T>::last() {
       tmp = tmp->m_next;
     }
     return &tmp->m_data;
-
-  } else {
-      std::cout << "ERROR : PANIC in LINKEDLIST!! last()" << "list is empty" << std::endl;
-      return NULL;
   }
 }
 
@@ -157,16 +163,17 @@ T* LinkedList<T>::last() {
 //     returns NULL if no such element exists.
 template <typename T>
 T* LinkedList<T>::at(int i) {
-  if (m_next != NULL && i < size() && i >= 0) {
+  if (i >= this->size() || i < 0) {
+    std::cout << "ERROR : PANIC in LINKEDLIST!! at(i)" << "list is empty or index is out of bounds" << std::endl;
+    return NULL;
+  } else {
+
     LinkedList* tmp = this;
 
     for (int j = 0; j < i; j++) {
       tmp = tmp->m_next;
     }
     return &tmp->m_data;
-  } else {
-      std::cout << "ERROR : PANIC in LINKEDLIST!! at(i)" << "list is empty or index is out of bounds" << std::endl;
-      return NULL;
   }
 }
 
@@ -204,10 +211,8 @@ void LinkedList<T>::insert_front(const T& x) {
 template <typename T>
 void LinkedList<T>::insert(const T& x, int i) {
 
-  int size = this->size();
-  if (i >= size || i < 0) {
+  if (i >= this->size() || i < 0) {
     std::cout << "Error : Panic in LinkedList.Insert(i). " << i << " is an invalid index!" << std::endl;
-
     return;
   }
 
@@ -246,10 +251,8 @@ void LinkedList<T>::insert(const T& x, LinkedList<T>* pos){
 template <typename T>
 void LinkedList<T>::remove(int i) {
 
-  int size = this->size();
-  if ( i >= size || i < 0) {
+  if ( i >= this->size() || i < 0) {
     std::cout << "Error : Panic in LinkedList.Remove(i). " << i << " is an invalid index!" << std::endl;
-
     return;
   }
 
@@ -318,12 +321,12 @@ bool LinkedList<T>::operator== (const LinkedList<T>& rhs) const {
 //     otherwise, NULL
 template <typename T>
 LinkedList<T>* LinkedList<T>::find(const T& x) {
-  LinkedList<T>* p = this;
+  LinkedList<T>* tmp = this;
 
-  while(p->m_data != x && p->m_next != NULL) {
-    p = p->m_next;
+  while(tmp->m_data != x && tmp->m_next != NULL) {
+    tmp = tmp->m_next;
   }
-  return p;
+  return tmp;
 }
 
 

@@ -1,0 +1,11 @@
+10
+0 Nostromo          15           2
+1 AluminiumFalcon   36  30       4 5 10
+2 Hyperion          49  57       10 15
+3 Nimbus            63  50 50    7 10 10 20
+4 Titan             45  20 174   5 15
+0 PurplePearl       13           13
+1 Serenity          18  50       7   7 12
+2 Deadalus          10  100      10  33  
+3 Executor          80  10 10    10  10 16  10
+4 Sulacco           26  66 666   20 7  

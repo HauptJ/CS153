@@ -1,0 +1,39 @@
+
+Battle #1 : Nostromo vs. AluminiumFalcon.
+Winner! : AluminiumFalcon.
+AluminiumFalcon : hull = 32, armor = 30 : laser = 4 missiles = 3,10.
+
+Battle #2 : Hyperion vs. Nimbus.
+Winner! : Nimbus.
+Nimbus : hull = 56, shield = 23, armor = 50 : laser = 7 missiles = 5,10 plasma = 20.
+
+Battle #3 : Titan vs. PurplePearl.
+Winner! : Titan
+Titan : hull = 45, armor = 20, personnel = 174 :  missiles = 4,15.
+
+Battle #4 : Serenity vs. Deadalus.
+Winner! : Serenity
+Serenity : hull = 18, armor = 50 : laser = 7 missiles = 6,12.
+
+Battle #5 : Executor vs. Sulacco.
+Winner! : Executor
+Executor : hull = 38, shield = 10, armor = 0 : laser = 10 missiles = 0,16 plasma = 10.
+
+Battle #6 : AluminiumFalcon vs. Nimbus.
+Winner! : Nimbus.
+Nimbus : hull = 56, shield = 8, armor = 35 : laser = 7 missiles = 0,10 plasma = 20.
+
+Battle #7 : Titan vs. Serenity.
+Winner! : Serenity.
+Serenity : hull = 18, armor = 22 : laser = 7 missiles = 0,12.
+
+Battle #8 : Executor vs. Nimbus.
+Winner! : Executor
+Executor : hull = 17, shield = 0, armor = 0 : laser = 10 missiles = 0,16 plasma = 10.
+
+Battle #9 : Serenity vs. Executor.
+Winner! : Executor.
+Executor : hull = 3, shield = 0, armor = 0 : laser = 10 missiles = 0,16 plasma = 10.
+
+*** CHAMPION!!! : Executor.
+Executor : hull = 3, shield = 0, armor = 0 : laser = 10 missiles = 0,16 plasma = 10.

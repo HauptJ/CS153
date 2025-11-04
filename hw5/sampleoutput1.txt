@@ -1,0 +1,11 @@
+
+Battle #1 : Stroustrup vs. Dijkstra.
+Winner! : Dijkstra.
+Dijkstra : hull = 37, shield = 19, armor = 50 : laser = 7 missiles = 2,12 plasma = 30.
+
+Battle #2 : Wirth vs. Dijkstra.
+Winner! : Dijkstra.
+Dijkstra : hull = 25, shield = 0, armor = 50 : laser = 7 missiles = 0,12 plasma = 30.
+
+*** CHAMPION!!! : Dijkstra.
+Dijkstra : hull = 25, shield = 0, armor = 50 : laser = 7 missiles = 0,12 plasma = 30.

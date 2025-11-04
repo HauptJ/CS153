@@ -1,0 +1,6 @@
+*.exe
+*.obj
+a.out
+.vs/*
+vcpkg_installed/*
+/vcpkg.C.ProgramFiles.MicrosoftVisualStudio.2022.Community.VC.vcpkg.1.0.0.nupkg

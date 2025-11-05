@@ -1,4 +1,12 @@
-#include "SpaceBattleQueue.h"
+template <class T>
+SpaceBattleQueue<T>::SpaceBattleQueue(const SpaceBattleQueue<T>& cpy) {
+	m_size = cpy.m_size;
+	m_max_size = cpy.m_max_size;
+	m_data = new T[m_max_size];
+	for (unsigned int i = 0; i < m_size; i++) {
+		m_data[i] = cpy.m_data[i];
+	}
+}
 
 // Purpose: Checks if a queue is empty
 // Returns: 'true' if the queue is empty
@@ -18,20 +26,17 @@ void SpaceBattleQueue<T>::clear() {
 // Postconditions: x is now the element at the end of the queue, 
 template <class T>
 void SpaceBattleQueue<T>::enqueue(const T& x) {
-  // Default implementation using only pure virtual functions
-  SpaceBattleQueue<T> tempQueue;
-  // Step 1: Dequeue all elements into a temporary queue
-  while (!this->isEmpty()) {
-	tempQueue.enqueue(this->front());
-	this->dequeue();
-  }
-  // Step 2: Enqueue the new element into the original queue
-  this->enqueue(x);
-  // Step 3: Enqueue back all elements from the temporary queue
-  while (!tempQueue.isEmpty()) {
-	this->enqueue(tempQueue.front());
-	tempQueue.dequeue();
-  }
+	if (m_size >= m_max_size) {
+		m_max_size = m_max_size * 2;
+		T* new_data = new T[m_max_size];
+		for (unsigned int i = 0; i < m_size; i++) {
+			new_data[i] = m_data[i];
+		}
+		delete[] m_data;
+		m_data = new_data;
+	}
+	m_data[m_size] = x;
+	m_size++;
 }
 
 
@@ -41,21 +46,12 @@ void SpaceBattleQueue<T>::enqueue(const T& x) {
 // Dequeueing from an empty Queue produces no errors, queue remains empty.
 template <class T>
 void SpaceBattleQueue<T>::dequeue() {
-  // Default implementation using only pure virtual functions
+	// Default implementation using only pure virtual functions
   if (!this->isEmpty()) {
-	this->front(); // Access front to ensure it's valid
-	SpaceBattleQueue<T> tempQueue;
-	// Step 1: Dequeue all elements except the front into a temporary queue
-	this->dequeue(); // Remove the front element
-	while (!this->isEmpty()) {
-	  tempQueue.enqueue(this->front());
-	  this->dequeue();
+	for (int i = 0; i < m_size - 1; i++) {
+	  m_data[i] = m_data[i + 1];
 	}
-	// Step 2: Enqueue back all elements from the temporary queue
-	while (!tempQueue.isEmpty()) {
-	  this->enqueue(tempQueue.front());
-	  tempQueue.dequeue();
-	}
+	m_size--;
   }
 }
 
@@ -86,40 +82,11 @@ bool SpaceBattleQueue<T>::isEmpty() const {
 // Returns: the number of elements in the Queue
 template <typename T>
 int SpaceBattleQueue<T>::size() const {
-  int count = 0;
-  AbstractQueue<T> tempQueue;
-  while (!this->isEmpty()) {
-	tempQueue.enqueue(this->front());
-	this->dequeue();
-	count++;
-  }
-  while (!tempQueue.isEmpty()) {
-	this->enqueue(tempQueue.front());
-	tempQueue.dequeue();
-  }
-  return count;
+	return m_size;
 }
 
+// Purpose: Destructor
 template <class T>
-void SpaceBattleQueue<T>::expand() {
-  // Implementation of expand function
-  m_max_size = m_max_size +1;
-  T* new_data = new T[m_max_size];
-  for (unsigned int i = 0; i < m_size; i++) {
-	new_data[i] = m_data[i];
-  }
+SpaceBattleQueue<T>::~SpaceBattleQueue() {
   delete[] m_data;
-  m_data = new_data;
-}
-
-template <class T>
-void SpaceBattleQueue<T>::shrink() {
-  // Implementation of shrink function
-  m_max_size = m_max_size -1;
-  T* new_data = new T[m_max_size];
-  for (unsigned int i = 0; i < m_size; i++) {
-	  new_data[i] = m_data[i];
-  }
-  delete[] m_data;
-  m_data = new_data;
 }

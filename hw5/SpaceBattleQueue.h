@@ -10,8 +10,8 @@ class SpaceBattleQueue : public AbstractQueue<T> {
 public:
 	SpaceBattleQueue() {
 		m_size = 0;
-		m_max_size = MAX_SIZE;
-		m_data = new T[MAX_SIZE];
+		m_max_size = INIT_MAX_SIZE;
+		m_data = new T[INIT_MAX_SIZE];
 	}
 	SpaceBattleQueue(const SpaceBattleQueue<T>& cpy);
 
@@ -20,7 +20,7 @@ public:
 	void clear();
 	void enqueue(const T& x);
 	void dequeue();
-	const T& front() const throw(int);
+	const T& front() const;
 	bool isEmpty() const;
 	int size() const;
 

@@ -1,12 +1,32 @@
-#include <gtest/gtest.h>
-
-#ifndef MAX_SIZE
-// Provide a sensible MAX_SIZE if the project doesn't define it.
-// This keeps the test self-contained when building the test project.
-#define MAX_SIZE 10
-#endif
-
+#include "gtest/gtest.h"
 #include "SpaceBattleQueue.h"
+
+
+TEST(SpaceBattleQueueTest, SpaceBattleQueueDefaultConstructor) {
+    SpaceBattleQueue<int> sbq;
+    EXPECT_EQ(sbq.size(), 0);
+    EXPECT_TRUE(sbq.isEmpty());
+    EXPECT_THROW(sbq.front(), int);
+}
+
+TEST(SpaceBattleQueueTest, SpaceBattleQueueCopyConstructor) {
+    SpaceBattleQueue<int> sbq1;
+    sbq1.enqueue(1);
+    sbq1.enqueue(2);
+    sbq1.enqueue(3);
+
+    SpaceBattleQueue<int> sbq2(sbq1); // Use copy constructor
+
+    // Check that sizes are equal
+    EXPECT_EQ(sbq1.size(), sbq2.size());
+
+    // Check that front elements are equal
+    EXPECT_EQ(sbq1.front(), sbq2.front());
+
+    // Modify original and check that copy is unaffected
+    sbq1.dequeue();
+    EXPECT_NE(sbq1.front(), sbq2.front());
+}
 
 // Basic smoke tests for SpaceBattleQueue public API.
 // These tests assume the queue behaves like a normal FIFO queue:

@@ -60,7 +60,7 @@ void SpaceBattleQueue<T>::dequeue() {
 // Returns: a reference to the element currently in front of the queue
 // Exception: if the queue is currently empty, throw SOMETHING!!
 template <class T>
-const T& SpaceBattleQueue<T>::front() const throw(int) {
+const T& SpaceBattleQueue<T>::front() const {
   // Default implementation using only pure virtual functions
   if (this->isEmpty()) {
     throw -1;

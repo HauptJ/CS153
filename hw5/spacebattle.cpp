@@ -4,13 +4,10 @@
 
 using namespace std;
 
-/*void loadQueue(SpaceBattleQueue<Spaceship*> sbq) {
+SpaceBattleQueue<Spaceship*> loadQueue() {
 
-
-}*/
-
-int main() {
 	SpaceBattleQueue<Spaceship*> sbq;
+
 	int numShips;
 	cin >> numShips;
 	cin.ignore(); // To ignore the newline character after the number input
@@ -73,7 +70,10 @@ int main() {
 				break;
 		}
 	}
+	return sbq;
+}
 
+void runSim(SpaceBattleQueue<Spaceship*> sbq) {
 	int battleNum = 1;
 	while (sbq.size() > 1) {
 		Spaceship *p1 = sbq.front();
@@ -111,5 +111,12 @@ int main() {
 	}
 	cout << "CHAMPION: " << sbq.front()->getName() << endl;
 	sbq.front()->status();
+}
+
+int main() {
+
+	SpaceBattleQueue<Spaceship*> sbq = loadQueue();
+	runSim(sbq);
+
 	return 0;
 }

@@ -96,6 +96,7 @@ public:
 //   and updates the ships status, 
 //   (for example: number of missiles left)  
 // -- PURE VIRTUAL
+  virtual void fire() = 0;
   virtual void fire(weapon& s, int& power) = 0;
 
 

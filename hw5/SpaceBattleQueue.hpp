@@ -1,3 +1,5 @@
+#include "SpaceBattleQueue.h"
+
 template <class T>
 SpaceBattleQueue<T>::SpaceBattleQueue(const SpaceBattleQueue<T>& cpy) {
 	m_size = cpy.m_size;
@@ -10,10 +12,10 @@ SpaceBattleQueue<T>::SpaceBattleQueue(const SpaceBattleQueue<T>& cpy) {
 
 // Purpose: Checks if a queue is empty
 // Returns: 'true' if the queue is empty
-//     'false' otherwise 
+//     'false' otherwise
 
 // Purpose: clears the queue
-// Postconditions: the queue is now empty 
+// Postconditions: the queue is now empty
 template <class T>
 void SpaceBattleQueue<T>::clear() {
   while (!isEmpty()) {
@@ -23,7 +25,7 @@ void SpaceBattleQueue<T>::clear() {
 
 // Purpose: enqueue an element into the queue
 // Parameters: x is the item to add to the queue
-// Postconditions: x is now the element at the end of the queue, 
+// Postconditions: x is now the element at the end of the queue,
 template <class T>
 void SpaceBattleQueue<T>::enqueue(const T& x) {
 	if (m_size >= m_max_size) {
@@ -40,7 +42,7 @@ void SpaceBattleQueue<T>::enqueue(const T& x) {
 }
 
 
-// Purpose: dequeues 
+// Purpose: dequeues
 // Postconditions: the element formerly at the front of the queue has
 //     been removed
 // Dequeueing from an empty Queue produces no errors, queue remains empty.
@@ -72,7 +74,7 @@ const T& SpaceBattleQueue<T>::front() const {
 
 // Purpose: Checks if a queue is empty
 // Returns: 'true' if the queue is empty
-//     'false' otherwise 
+//     'false' otherwise
 template <typename T>
 bool SpaceBattleQueue<T>::isEmpty() const {
   return (size() == 0);

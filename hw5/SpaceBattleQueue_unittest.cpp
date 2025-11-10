@@ -1,31 +1,66 @@
 #include "gtest/gtest.h"
-#include "SpaceBattleQueue.h"
+#include "SpaceBattleQueue.hpp"
+#include "spaceship.cpp"
+
+TEST(SpaceBattleQueueTest, SpaceBattleQueueDefaultConstructorSpaceship) {
+    SpaceBattleQueue<Spaceship*> ssq;
+    EXPECT_TRUE(ssq.isEmpty());
+}
 
 
 TEST(SpaceBattleQueueTest, SpaceBattleQueueDefaultConstructor) {
-    SpaceBattleQueue<int> sbq;
+    SpaceBattleQueue<Spaceship*> sbq;
     EXPECT_EQ(sbq.size(), 0);
     EXPECT_TRUE(sbq.isEmpty());
     EXPECT_THROW(sbq.front(), int);
 }
 
-TEST(SpaceBattleQueueTest, SpaceBattleQueueCopyConstructor) {
-    SpaceBattleQueue<int> sbq1;
-    sbq1.enqueue(1);
-    sbq1.enqueue(2);
-    sbq1.enqueue(3);
+TEST(SpaceBattleQueueTest, SpaceBattleQueueConstructorEnqueueSpaceships) {
+    SpaceBattleQueue<Spaceship*> sbq;
+    Spaceship *f = new Frigate("bob", 10, 11);
+    Spaceship *b = new Battlecruiser("cat", 10, 11, 12, 13);
+    Spaceship *d = new Destroyer("dog", 10, 11, 12, 13, 14);
+    sbq.enqueue(f);
+    sbq.enqueue(b);
+    sbq.enqueue(d);
+    EXPECT_EQ(sbq.size(), 3);
+    EXPECT_EQ(sbq.front()->getName(), "bob");
+}
 
-    SpaceBattleQueue<int> sbq2(sbq1); // Use copy constructor
+TEST(SpaceBattleQueueTest, SpaceBattleQueueConstructorDequeSpaceships) {
+    SpaceBattleQueue<Spaceship*> sbq;
+    Spaceship *f = new Frigate("bob", 10, 11);
+    Spaceship *b = new Battlecruiser("cat", 10, 11, 12, 13);
+    Spaceship *d = new Destroyer("dog", 10, 11, 12, 13, 14);
+    sbq.enqueue(f);
+    sbq.enqueue(b);
+    sbq.enqueue(d);
+    sbq.dequeue();
+    EXPECT_EQ(sbq.size(), 2);
+    EXPECT_EQ(sbq.front()->getName(), "cat");
+}
+
+
+TEST(SpaceBattleQueueTest, SpaceBattleQueueCopyConstructor) {
+    SpaceBattleQueue<Spaceship*> sbq1;
+    Spaceship *f = new Frigate("bob", 10, 11);
+    Spaceship *b = new Battlecruiser("cat", 10, 11, 12, 13);
+    Spaceship *d = new Destroyer("dog", 10, 11, 12, 13, 14);
+    sbq1.enqueue(&*f);
+    sbq1.enqueue(&*b);
+    sbq1.enqueue(&*d);
+
+    SpaceBattleQueue<Spaceship*> sbq2(sbq1); // Use copy constructor
 
     // Check that sizes are equal
     EXPECT_EQ(sbq1.size(), sbq2.size());
 
     // Check that front elements are equal
-    EXPECT_EQ(sbq1.front(), sbq2.front());
+    EXPECT_EQ(sbq1.front()->getName(), sbq2.front()->getName());
 
     // Modify original and check that copy is unaffected
     sbq1.dequeue();
-    EXPECT_NE(sbq1.front(), sbq2.front());
+    EXPECT_NE(sbq1.front()->getName(), sbq2.front()->getName());
 }
 
 // Basic smoke tests for SpaceBattleQueue public API.
@@ -37,14 +72,15 @@ TEST(SpaceBattleQueueTest, SpaceBattleQueueCopyConstructor) {
 // - clear empties the queue
 // - copy constructor performs a deep copy
 
+
 TEST(SpaceBattleQueueTest, DefaultConstruct_IsEmpty) {
-    SpaceBattleQueue<int> q;
+    SpaceBattleQueue<Spaceship*> q;
     EXPECT_TRUE(q.isEmpty());
     EXPECT_EQ(q.size(), 0);
 }
 
 TEST(SpaceBattleQueueTest, FrontThrowsOnEmpty) {
-    const SpaceBattleQueue<int> q;
+    const SpaceBattleQueue<Spaceship*> q;
     EXPECT_THROW(q.front(), int);
 }
 

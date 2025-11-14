@@ -26,12 +26,9 @@ public:
     void deallocateTree(TreeNode<T>*& thisNode);
     bool isEmpty() const override;
 
-    //void insert_rec(const T &x);
     void insert_iter(const T &x);
     void insert(const T &x) override;
 
-    //void deleteNode(TreeNode<T>* &currNode, T &x);
-    //void remove_rec(const T &x);
     void remove_iter(const T &x);
     void remove(const T &x) override;
 

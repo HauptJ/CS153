@@ -74,8 +74,8 @@ TEST(MyBSTree_unittests, test_remove) {
     EXPECT_EQ(tree.height(), inNodeVal.size()-1);
 }
 
-/*
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
-}*/
+}

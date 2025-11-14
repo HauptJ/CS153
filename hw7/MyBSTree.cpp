@@ -63,7 +63,6 @@ MyBSTree<T> &MyBSTree<T>::operator=(const MyBSTree &obj) {
     return *this;
 }
 
-
 template<class T>
 void MyBSTree<T>::copyTree(TreeNode<T> *&thisTreeNode, const TreeNode<T> *thatTreeNode) {
     // check if the current node of the other thee is null or not
@@ -98,47 +97,15 @@ bool MyBSTree<T>::isEmpty() const {
     return this->m_root == nullptr;
 }
 
+// Purpose: Inserts an element into a tree
+// Parameters: x is value to be added to the tree
+// Postconditions: The tree now contains x
+//     if the tree already contains x, ignore insertion
 template<class T>
 void MyBSTree<T>::insert(const T& x) {
+    // This passthrough is to enable the possibly switching out iterative and recursive implementations.
     insert_iter(x);
 }
-
-/*
-template<class T>
-void MyBSTree<T>::insert_rec(const T &x) {
-    // insert into empty tree
-    if (this->m_root == nullptr) {
-        cout << "inserting x "<< x << endl;
-        this->m_root = new TreeNode<T>(x);
-        ++this->m_size;
-    }
-    // insert into non-empty tree
-    else {
-        if (x < this->m_root->m_data) {
-            if (this->m_root->m_left != nullptr) {
-                this->m_root->m_left;
-                insert_rec(x);
-            }
-            else {
-                cout << "inserting x "<< x << endl;
-                this->m_root->m_left = new TreeNode<T>(x);
-                ++this->m_size;
-            }
-        } else if (x > this->m_root->m_data) {
-            if (this->m_root->m_right != nullptr) {
-                this->m_root = this->m_root->m_right;
-                insert_rec(x);
-            }
-            else {
-                cout << "inserting x "<< x << endl;
-                this->m_root->m_right = new TreeNode<T>(x);
-                ++this->m_size;
-            }
-        }
-    }
-}
-*/
-
 
 template<class T>
 void MyBSTree<T>::insert_iter(const T& x) {
@@ -157,10 +124,6 @@ void MyBSTree<T>::insert_iter(const T& x) {
                     if (this->contains(x) > this->m_height) {
                         this->m_height = this->contains(x);
                     }
-                    /*if (current->m_right == nullptr) {
-                        ++this->m_height;
-                    }*/
-
                     break;
                 }
                 else {
@@ -173,9 +136,6 @@ void MyBSTree<T>::insert_iter(const T& x) {
                     if (this->contains(x) > this->m_height) {
                         this->m_height = this->contains(x);
                     }
-                    /*if (current->m_left == nullptr) {
-                        ++this->m_height;
-                    }*/
                     break;
                 }
                 else {
@@ -192,56 +152,14 @@ void MyBSTree<T>::insert_iter(const T& x) {
 }
 
 
+// Purpose: Removes an element from the tree
+// Parameters: x, the element to remove
+// Postconditions: the tree does not contains x
 template<class T>
 void MyBSTree<T>::remove(const T&x) {
+    // This passthrough is to enable the possibly switching out iterative and recursive implementations.
     remove_iter(x);
 }
-
-/*
-template<class T>
-void MyBSTree<T>::deleteNode(TreeNode<T> *&ptr, T &x) {
-    // initialize a curr ptr
-    TreeNode<T> *curr = nullptr;
-    if (ptr != nullptr) {
-        // case where the left is null, one child set on the right
-        // as the new node to join.
-        // case where the right is null, one child set on the left
-        // as the node to join
-        if (ptr->m_left == nullptr) {
-            curr = ptr;
-            ptr = ptr->m_right;
-            delete curr;
-        }
-        else if (ptr->m_right == nullptr) {
-            curr = ptr;
-            ptr = ptr->m_left;
-            delete curr;
-        }
-        else {
-            // case when there are two children
-            curr = ptr->m_right;
-            while (curr->m_left != nullptr) {
-                curr = curr->m_left;
-            }
-            // traverse down to the next inorder successor
-            ptr->m_data = curr->m_data;
-            ptr = remove_rec(ptr->right, curr->m_data);
-
-        }
-    }
-}
-*/
-
-/*
-template<class T>
-void MyBSTree<T>::remove_rec(const T &x) {
-    // check if the ptr is not a null ptr, traverse through the tree byh
-    // comparing the current ptr data to that of the item. If it matches delete it
-
-    if ()
-}
-*/
-
 
 template<class T>
 void MyBSTree<T>::remove_iter(const T&x) {
